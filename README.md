@@ -61,44 +61,6 @@ avec les flèches. Dès que l'on zoome, une mini-carte apparaît en bas à gauch
 la vue y est encadrée, les expéditions (ou les villes, pendant
 l'organisation) y sont pointées ; un clic ou un glisser y déplace la vue.
 
-## Organisation du code
-
-- `jeu/` : le moteur de règles, sans interface.
-  - `plateau.go` : cases hexagonales (pointe en haut, rangées impaires décalées),
-    voisins, distances, fleuves orientés, cascades, villes ; la région centrale
-    (18 cases candidates décrites par zone, fleuve et terrain).
-  - `plateau_donnees.go` : terrains, tronçons de fleuve, cascades, villes et
-    grille, relevés sur la photo de l'encart (voir « Le plateau »).
-  - `tables.go` : les six tableaux de la carte.
-  - `etat.go`, `tour.go` : expéditions, pions-natifs, feuille commune ; le tour
-    suit l'organigramme de la règle (déplacement, événement ou rencontre,
-    attitude, combat, renseignement, annonce, retour).
-  - `deplacement.go` : à pied, en jangada (fleuves, marais, côte), construction.
-  - `verite.go` : la zone d'El Dorado se fixe en cours de partie ; `Croyance`
-    énumère les codes secrets possibles des autres pour estimer chaque zone.
-  - `ia.go` : l'ordinateur.
-  - `controleur.go` : l'interface d'un joueur, que le moteur appelle.
-- `partie.go` : le moteur joue dans sa goroutine ; le joueur humain répond par
-  un canal (requêtes `ReqDeplacer`, `ReqContact`, `ReqVictime`, `ReqCombat`,
-  `ReqAnnoncer`).
-- Interface : `vue.go` (plateau, coups, pions, infobulles), `camera.go`
-  (zoom, cadrage, mini-carte), `panneau.go`,
-  `organisation.go`, `accueil.go`, `regles.go`, `feuille.go`,
-  `ressources.go` (palette, polices, cartouches, boutons, dés).
-- Habillage : le cuir et le parchemin des cartes de conquistadors, la frise en
-  grecque de la bordure de la carte (découpée sur la photo) en bandeau, l'or
-  des Incas ; titres Cinzel Decorative, intitulés gothiques Pirata One, texte
-  EB Garamond (OFL, `assets/polices`). Les pions sont ceux de l'encart,
-  découpés sur la photo.
-
-## Le plateau
-
-La carte affichée est la photo de l'encart, redressée et rendue plus nette
-(`assets/gen/plateau.jpg`). Les cases (hexagones, 25 rangées de 27), les
-terrains, les fleuves orientés vers l'aval, les cascades et les villes y ont
-été relevés par un outil qui n'est pas distribué ; le résultat est dans
-`jeu/plateau_donnees.go`.
-
 ## Choix d'adaptation
 
 La règle est appliquée telle quelle ; là où elle est muette, ambiguë ou
